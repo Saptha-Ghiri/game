@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=600></canvas>
+      <canvas id="unity-canvas" width=1920 height=1080></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -56,11 +56,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/web_game.loader.js";
+      var loaderUrl = buildUrl + "/web_game_2.loader.js";
       var config = {
-        dataUrl: buildUrl + "/web_game.data.br",
-        frameworkUrl: buildUrl + "/web_game.framework.js.br",
-        codeUrl: buildUrl + "/web_game.wasm.br",
+        dataUrl: buildUrl + "/web_game_2.data.unityweb",
+        frameworkUrl: buildUrl + "/web_game_2.framework.js.unityweb",
+        codeUrl: buildUrl + "/web_game_2.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "PenChamp",
         productName: "PenChamp",
@@ -102,8 +102,8 @@
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
+        canvas.style.width = "1920px";
+        canvas.style.height = "1080px";
       }
 
       loadingBar.style.display = "block";
@@ -111,20 +111,17 @@
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
-  createUnityInstance(canvas, config, (progress) => {
-    progressBarFull.style.width = 100 * progress + "%";
-  }).then((unityInstance) => {
-  loadingBar.style.display = "none";
-  unityInstance.SetFullscreen(1); // Direct fullscreen activation
-  fullscreenButton.onclick = () => {
-    unityInstance.SetFullscreen(1);
-  };
-}).catch((message) => {
-    alert(message);
-  });
-};
-
-
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }).catch((message) => {
+          alert(message);
+        });
+      };
       document.body.appendChild(script);
     </script>
   </body>
